@@ -22,12 +22,12 @@ export default function Nav() {
       <div className={styles.nav__menu}>
         <ul className={styles.menu__list}>
           <li className={styles.menu__item}>
-            <Link href="#" className={styles.menu__link}>
+            <Link href="/" className={styles.menu__link}>
               Главное
             </Link>
           </li>
           <li className={styles.menu__item}>
-            <Link href="#" className={styles.menu__link}>
+            <Link href="/myTracks" className={styles.menu__link}>
               Мой плейлист
             </Link>
           </li>
