@@ -10,7 +10,7 @@ export default function SignUp() {
         <div className={styles.containerEnter}>
           <div className={styles.modal__block}>
             <form className={styles.modal__form}>
-              <Link href="/signin">
+              <Link href="/">
                 <div className={styles.modal__logo}>
                   <Image
                     width={140}
