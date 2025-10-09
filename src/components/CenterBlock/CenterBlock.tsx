@@ -1,21 +1,17 @@
 import Link from 'next/link';
 import styles from './centerBlock.module.css';
-import classNames from 'classnames';
 import { data } from '../../data';
 import { formatTime } from '../../utils/helpers';
 import Search from '../Search/Search';
+import Filter from '../Filter/Filter';
+import classNames from 'classnames';
 
 export default function CenterBlock() {
   return (
     <div className={styles.centerblock}>
       <Search />
       <h2 className={styles.centerblock__h2}>Треки</h2>
-      <div className={styles.centerblock__filter}>
-        <div className={styles.filter__title}>Искать по:</div>
-        <div className={styles.filter__button}>исполнителю</div>
-        <div className={styles.filter__button}>году выпуска</div>
-        <div className={styles.filter__button}>жанру</div>
-      </div>
+      <Filter data={data} />
       <div className={styles.centerblock__content}>
         <div className={styles.content__title}>
           <div className={classNames(styles.playlistTitle__col, styles.col01)}>
@@ -45,7 +41,7 @@ export default function CenterBlock() {
                   </div>
                   <div className="track__title-text">
                     <Link className={styles.track__titleLink} href="">
-                      {track.name}{' '}
+                      {track.name}
                       <span className={styles.track__titleSpan}></span>
                     </Link>
                   </div>
