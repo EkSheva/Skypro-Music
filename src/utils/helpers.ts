@@ -8,7 +8,7 @@ export function formatTime(time: number) {
   return `${minuts} : ${outInputSeconds}`;
 }
 
-export function getUniqueValueBeKey(
+export function getUniqueValueByKey(
   arr: TrackTypes[],
   key: keyof TrackTypes,
 ): string[] {
