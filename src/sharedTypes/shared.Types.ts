@@ -10,5 +10,3 @@ export interface TrackTypes {
   track_file: string;
   stared_user: string[];
 }
-
-
