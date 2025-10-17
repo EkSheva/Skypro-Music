@@ -1,11 +1,10 @@
-import './page.css';
-import styles from './page.module.css';
-import Nav from '../components/Nav/Nav';
-import SideBar from '../components/SideBar/SideBar';
-import Bar from '../components/Bar/Bar';
-import CenterBlock from '../components/CenterBlock/CenterBlock';
+import Bar from '../../components/Bar/Bar';
+import CenterBlock from '../../components/CenterBlock/CenterBlock';
+import Nav from '../../components/Nav/Nav';
+import SideBar from '../../components/SideBar/SideBar';
+import styles from '../page.module.css';
 
-export default function Home() {
+export default function DanceHit() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
