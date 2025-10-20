@@ -2,9 +2,10 @@
 
 import Link from 'next/link';
 import styles from './track.module.css';
+import classNames from 'classnames';
 import { formatTime } from '../../utils/helpers';
 import { TrackTypes } from '../../sharedTypes/shared.Types';
-import { useAppDispatch } from '../../store/store';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 import { setCurrentTrack } from '../../store/features/trackSlice';
 
 interface trackTypeProp {
@@ -13,19 +14,31 @@ interface trackTypeProp {
 
 export default function Track({ track }: trackTypeProp) {
   const dispatch = useAppDispatch();
+  const isPlay = useAppSelector((state) => state.tracks.isPlay);
+  const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
+  const currentTrackId = useAppSelector(
+    (state) => state.tracks.currentTrack?._id,
+  );
   const onClickTrack = () => {
     dispatch(setCurrentTrack(track));
   };
-
+  const shouldShowPlayingDot = currentTrack && currentTrackId === track._id;
+  
   return (
     <div className={styles.playlist__item} onClick={onClickTrack}>
       <div className={styles.playlist__track}>
         <div className={styles.track__title}>
           <div className={styles.track__titleImage}>
-            <svg className={styles.track__titleSvg}>
+            <svg
+              className={classNames(styles.track__titleSvg, {
+                [isPlay ? styles.playing_dot : styles.static_dot]:
+                  shouldShowPlayingDot,
+              })}
+            >
               <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
             </svg>
           </div>
+
           <div className="track__title-text">
             <Link className={styles.track__titleLink} href="">
               {track.name}
