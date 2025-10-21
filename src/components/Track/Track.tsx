@@ -6,7 +6,8 @@ import classNames from 'classnames';
 import { formatTime } from '../../utils/helpers';
 import { TrackTypes } from '../../sharedTypes/shared.Types';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { setCurrentTrack } from '../../store/features/trackSlice';
+import { setCurrentTrack, setIsPlay } from '../../store/features/trackSlice';
+import { useRef } from 'react';
 
 interface trackTypeProp {
   track: TrackTypes;
@@ -14,16 +15,23 @@ interface trackTypeProp {
 
 export default function Track({ track }: trackTypeProp) {
   const dispatch = useAppDispatch();
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const isPlay = useAppSelector((state) => state.tracks.isPlay);
   const currentTrack = useAppSelector((state) => state.tracks.currentTrack);
   const currentTrackId = useAppSelector(
     (state) => state.tracks.currentTrack?._id,
   );
+  
   const onClickTrack = () => {
     dispatch(setCurrentTrack(track));
+     if (audioRef.current) {
+      audioRef.current.play();
+      dispatch(setIsPlay(true));
+    }
   };
-  const shouldShowPlayingDot = currentTrack && currentTrackId === track._id;
   
+  const shouldShowPlayingDot = currentTrack && currentTrackId === track._id;
+
   return (
     <div className={styles.playlist__item} onClick={onClickTrack}>
       <div className={styles.playlist__track}>
