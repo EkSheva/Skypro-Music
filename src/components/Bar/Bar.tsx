@@ -4,7 +4,7 @@ import Link from 'next/link';
 import styles from './Bar.module.css';
 import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { setIsPlay } from '../../store/features/trackSlice';
 
 export default function Bar() {
@@ -12,22 +12,28 @@ export default function Bar() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const isPlay = useAppSelector((state) => state.tracks.isPlay);
   const dispatch = useAppDispatch();
-  if (!currentTrack) return <></>;
 
-  const playTrack = () => {
-    if (audioRef.current) {
-      audioRef.current.play();
-      dispatch(setIsPlay(true));
-    }
-  };
-  const pauseTrack = () => {
-    if (audioRef.current) {
+  useEffect(() => {
+    if (audioRef.current && currentTrack) {
+      if (isPlay) {
+        audioRef.current.play();
+      } else {
+        audioRef.current.pause();
+      }
+    } else if (audioRef.current && !currentTrack) {
       audioRef.current.pause();
+      audioRef.current.removeAttribute('src');
       dispatch(setIsPlay(false));
     }
+  }, [currentTrack, isPlay, dispatch]);
+
+  const togglePlay = () => {
+    if (currentTrack) {
+      dispatch(setIsPlay(!isPlay));
+    }
   };
 
-  const togglePlay = isPlay ? pauseTrack : playTrack;
+  if (!currentTrack) return <></>;
 
   return (
     <div className={styles.bar}>
