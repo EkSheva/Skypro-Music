@@ -26,9 +26,9 @@ const trackSlice = createSlice({
     },
     setCurrentTrackList: (state, action: PayloadAction<TrackTypes[]>) => {
       state.playList = action.payload;
-      state.shaffledPlayList = [
-        ...action.payload.sort(() => Math.random() - 0.5),
-      ];
+      state.shaffledPlayList = [...state.playList].sort(
+        () => Math.random() - 0.5,
+      );
     },
 
     setNextTrack: (state) => {

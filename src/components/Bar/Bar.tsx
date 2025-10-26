@@ -40,7 +40,7 @@ export default function Bar() {
       audioRef.current.removeAttribute('src');
       dispatch(setIsPlay(false));
     }
-  }, [currentTrack, isPlay, isLoop, dispatch]);
+  }, [currentTrack, isPlay, isLoop, isShuffle, dispatch]);
 
   const togglePlay = () => {
     if (currentTrack) {
